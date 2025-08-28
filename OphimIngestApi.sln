@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OphimIngestApi", "OphimIngestApi\OphimIngestApi.csproj", "{65229C51-1F27-499C-89DC-843E4B40CEDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65229C51-1F27-499C-89DC-843E4B40CEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65229C51-1F27-499C-89DC-843E4B40CEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65229C51-1F27-499C-89DC-843E4B40CEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65229C51-1F27-499C-89DC-843E4B40CEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23FB0643-0C9B-4A14-987B-4044536CF2D6}
+	EndGlobalSection
+EndGlobal
