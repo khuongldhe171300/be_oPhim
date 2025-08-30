@@ -5113,11 +5113,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\OphimIngestApi\\OphimIngestApi.csproj",
+      "projectUniqueName": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\OphimIngestApi.csproj",
       "projectName": "OphimIngestApi",
-      "projectPath": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\OphimIngestApi\\OphimIngestApi.csproj",
+      "projectPath": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\OphimIngestApi.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\OphimIngestApi\\obj\\",
+      "outputPath": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

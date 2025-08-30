@@ -20,7 +20,21 @@ namespace OphimIngestApi.Controllers
             var latest = await _db.Movies.AsNoTracking()
                 .OrderByDescending(x => x.UpdatedAt)
                 .Take(take)
-                .Select(x => new { x.Slug, x.Name, x.OriginName, x.PosterUrl, x.Year, x.Quality, x.Lang, x.Type, x.Status })
+                .Select(x => new { 
+                    movie = new { 
+                        id = x.Id, 
+                        slug = x.Slug, 
+                        name = x.Name, 
+                        originName = x.OriginName,
+                        content = x.Content,
+                        posterUrl = x.PosterUrl, 
+                        year = x.Year, 
+                        quality = x.Quality, 
+                        lang = x.Lang, 
+                        type = x.Type, 
+                        status = x.Status 
+                    }
+                })
                 .ToListAsync();
 
             // hot theo view
@@ -28,7 +42,19 @@ namespace OphimIngestApi.Controllers
                 .OrderByDescending(x => x.View)
                 .ThenByDescending(x => x.UpdatedAt)
                 .Take(take)
-                .Select(x => new { x.Slug, x.Name, x.PosterUrl, x.Year, x.View, x.Quality, x.Lang })
+                .Select(x => new { 
+                    movie = new { 
+                        id = x.Id, 
+                        slug = x.Slug, 
+                        name = x.Name, 
+                        posterUrl = x.PosterUrl,
+                        content = x.Content,
+                        year = x.Year, 
+                        view = x.View, 
+                        quality = x.Quality, 
+                        lang = x.Lang 
+                    }
+                })
                 .ToListAsync();
 
             return Ok(new

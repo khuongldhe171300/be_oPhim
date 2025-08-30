@@ -1,2 +1,19 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# .vs folder (Visual Studio files)
+.vs/
+
+# User-specific files (Visual Studio/VSCode settings)
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Build results
+bin/
+obj/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt

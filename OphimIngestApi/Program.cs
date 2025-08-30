@@ -48,13 +48,26 @@ builder.Services.AddHttpClient("ophim", (sp, client) =>
 // ===== DI cho ingest service =====
 builder.Services.AddScoped<IngestService>();
 
+var MyCors = "_myCors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyCors, policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
+app.UseCors(MyCors);
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.MapControllers();
 app.Run();
