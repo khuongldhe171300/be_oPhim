@@ -34,8 +34,18 @@ namespace OphimIngestApi.Data.Entities
         public double? TmdbVoteAverage { get; set; }
         public int? TmdbVoteCount { get; set; }
 
+        // Additional fields from Ophim API
+        public bool IsCopyright { get; set; } = false;
+        public bool SubDocquyen { get; set; } = false;
+        public bool Chieurap { get; set; } = false;
+
+        // Foreign key for MovieList
+        public int? MovieListId { get; set; }
+
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        // Navigation properties
+        public MovieList? MovieList { get; set; }
         public ICollection<MovieCategory> MovieCategories { get; set; } = new List<MovieCategory>();
         public ICollection<MovieCountry> MovieCountries { get; set; } = new List<MovieCountry>();
         public ICollection<Actor> Actors { get; set; } = new List<Actor>();

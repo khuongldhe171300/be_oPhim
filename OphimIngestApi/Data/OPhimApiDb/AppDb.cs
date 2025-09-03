@@ -8,6 +8,7 @@ namespace OphimIngestApi.Data.OPhimApiDb
         public AppDb(DbContextOptions<AppDb> options) : base(options) { }
 
         public DbSet<Movie> Movies => Set<Movie>();
+        public DbSet<MovieList> MovieLists => Set<MovieList>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Country> Countries => Set<Country>();
         public DbSet<MovieCategory> MovieCategories => Set<MovieCategory>();
@@ -22,6 +23,7 @@ namespace OphimIngestApi.Data.OPhimApiDb
         {
             // ===== Index / Unique cơ bản
             b.Entity<Movie>().HasIndex(x => x.Slug).IsUnique();
+            b.Entity<MovieList>().HasIndex(x => x.Slug).IsUnique();
             b.Entity<Category>().HasIndex(x => x.Slug).IsUnique();
             b.Entity<Country>().HasIndex(x => x.Slug).IsUnique();
 
@@ -31,6 +33,13 @@ namespace OphimIngestApi.Data.OPhimApiDb
             b.Entity<Server>().HasIndex(x => new { x.MovieId, x.Name }).IsUnique();
 
             // ===== Khai báo QUAN HỆ + DeleteBehavior để tránh multiple cascade paths
+            // MovieList 1-* Movies (Restrict khi xóa MovieList)
+            b.Entity<Movie>()
+                .HasOne(m => m.MovieList)
+                .WithMany(ml => ml.Movies)
+                .HasForeignKey(m => m.MovieListId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             // Movie 1-* Episodes (Cascade khi xóa Movie)
             b.Entity<Episode>()
                 .HasOne(e => e.Movie)

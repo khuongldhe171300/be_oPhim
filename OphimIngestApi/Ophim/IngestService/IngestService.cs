@@ -23,6 +23,7 @@ namespace OphimIngestApi.Ophim.IngestService
             var path = string.Format(_opt.DetailPath, slug);
             var res = await client.GetFromJsonAsync<OphimMovieResponse>(path, cancellationToken: ct);
             var item = res?.Data?.Item ?? throw new Exception("Không lấy được chi tiết phim.");
+            var breadCrumb = res?.Data?.BreadCrumb ?? new List<OphimBreadCrumb>();
 
             // 1) Chỉ lấy Id phim (KHÔNG Include)
             var movie = await _db.Movies.SingleOrDefaultAsync(x => x.Slug == item.Slug, ct);
@@ -56,11 +57,34 @@ namespace OphimIngestApi.Ophim.IngestService
             movie.TmdbId = item.Tmdb?.Id;
             movie.TmdbVoteAverage = item.Tmdb?.VoteAverage;
             movie.TmdbVoteCount = item.Tmdb?.VoteCount;
+            movie.IsCopyright = item.IsCopyright;
+            movie.SubDocquyen = item.SubDocquyen;
+            movie.Chieurap = item.Chieurap;
             movie.UpdatedAt = DateTime.UtcNow;
 
             // Lưu để có movie.Id (nếu là phim mới)
             await _db.SaveChangesAsync(ct);
             var movieId = movie.Id;
+
+            // 1.5) Xử lý MovieList từ breadCrumb (tìm slug có pattern /danh-sach/*)
+            var listBreadCrumb = breadCrumb.FirstOrDefault(b => b.Slug.StartsWith("/danh-sach/"));
+            if (listBreadCrumb != null)
+            {
+                var listSlug = listBreadCrumb.Slug.Replace("/danh-sach/", "");
+                var movieList = await _db.MovieLists.FirstOrDefaultAsync(ml => ml.Slug == listSlug, ct);
+                if (movieList == null)
+                {
+                    movieList = new Data.Entities.MovieList 
+                    { 
+                        Slug = listSlug, 
+                        Name = listBreadCrumb.Name 
+                    };
+                    _db.MovieLists.Add(movieList);
+                    await _db.SaveChangesAsync(ct);
+                }
+                movie.MovieListId = movieList.Id;
+                await _db.SaveChangesAsync(ct);
+            }
 
             // 2) Upsert Category/Country (xoá link cũ bằng ExecuteDelete)
             await _db.MovieCategories.Where(mc => mc.MovieId == movieId).ExecuteDeleteAsync(ct);

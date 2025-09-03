@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|solutionrelative:ophimingestapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|d:\\toyeucode\\dophime\\be_movie_ophim\\ophimingestapi\\be_ophim\\ophimingestapi\\data\\entities\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|solutionrelative:ophimingestapi\\data\\entities\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|d:\\toyeucode\\dophime\\be_movie_ophim\\ophimingestapi\\be_ophim\\ophimingestapi\\ophim\\ingestservice\\ingestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|solutionrelative:ophimingestapi\\ophim\\ingestservice\\ingestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|d:\\toyeucode\\dophime\\be_movie_ophim\\ophimingestapi\\be_ophim\\ophimingestapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{65229C51-1F27-499C-89DC-843E4B40CEDA}|OphimIngestApi\\OphimIngestApi.csproj|solutionrelative:ophimingestapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,11 +26,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Data\\Entities\\Movie.cs",
+              "RelativeDocumentMoniker": "OphimIngestApi\\Data\\Entities\\Movie.cs",
+              "ToolTip": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Data\\Entities\\Movie.cs",
+              "RelativeToolTip": "OphimIngestApi\\Data\\Entities\\Movie.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAA7wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T15:11:36.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IngestService.cs",
+              "DocumentMoniker": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Ophim\\IngestService\\IngestService.cs",
+              "RelativeDocumentMoniker": "OphimIngestApi\\Ophim\\IngestService\\IngestService.cs",
+              "ToolTip": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Ophim\\IngestService\\IngestService.cs",
+              "RelativeToolTip": "OphimIngestApi\\Ophim\\IngestService\\IngestService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T14:56:21.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Program.cs",
               "RelativeDocumentMoniker": "OphimIngestApi\\Program.cs",
@@ -40,7 +72,7 @@
               "RelativeDocumentMoniker": "OphimIngestApi\\Controllers\\HomeController.cs",
               "ToolTip": "D:\\toyeucode\\doPhime\\Be_movie_ophim\\OphimIngestApi\\be_oPhim\\OphimIngestApi\\Controllers\\HomeController.cs",
               "RelativeToolTip": "OphimIngestApi\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAMgAAAAAAAAAAAAAwCABAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-28T13:26:17.223Z",
               "EditorCaption": ""

@@ -22,6 +22,11 @@ namespace OphimIngestApi.Ophim.OphimDtos
         [JsonPropertyName("year")] public int? Year { get; set; }
         [JsonPropertyName("view")] public long? View { get; set; }
 
+        // Additional fields from API
+        [JsonPropertyName("is_copyright")] public bool IsCopyright { get; set; } = false;
+        [JsonPropertyName("sub_docquyen")] public bool SubDocquyen { get; set; } = false;
+        [JsonPropertyName("chieurap")] public bool Chieurap { get; set; } = false;
+
         [JsonPropertyName("actor")] public List<string> Actor { get; set; } = new();
         [JsonPropertyName("director")] public List<string> Director { get; set; } = new();
         [JsonPropertyName("category")] public List<OphimSlugName> Category { get; set; } = new();
