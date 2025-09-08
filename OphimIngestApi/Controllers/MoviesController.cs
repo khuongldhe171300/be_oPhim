@@ -15,8 +15,7 @@ namespace OphimIngestApi.Controllers
         private readonly IngestService _ingest;
         public MoviesController(AppDb db, IngestService ingest) { _db = db; _ingest = ingest; }
 
-        // Ép kéo 1 phim theo slug
-        // POST /api/movies/ingest/tro-choi-con-muc
+        
         [HttpPost("ingest/{slug}")]
         public async Task<IActionResult> Ingest([FromRoute] string slug)
         {
@@ -24,7 +23,7 @@ namespace OphimIngestApi.Controllers
             return Ok(new { ok = true, slug });
         }
 
-        // Xem list (để FE call)
+      
         // GET /api/movies?keyword=choi&page=1&pageSize=12&cat=hanh-dong&country=han-quoc&year=2021
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] string? keyword,
@@ -34,23 +33,21 @@ namespace OphimIngestApi.Controllers
                                       [FromQuery] int page = 1,
                                       [FromQuery] int pageSize = 20)
         {
-            var q = _db.Movies.AsNoTracking().AsQueryable();  // Khởi tạo truy vấn cơ sở dữ liệu
+            var q = _db.Movies.AsNoTracking().AsQueryable();  
 
-            // Tìm kiếm theo từ khóa (không phân biệt chữ hoa chữ thường)
+         
             if (!string.IsNullOrWhiteSpace(keyword))
             {
-                var keywordLower = keyword.ToLower();  // Chuyển keyword về chữ thường
+                var keywordLower = keyword.ToLower(); 
                 q = q.Where(x => x.Name.ToLower().Contains(keywordLower)
                                  || (x.OriginName != null && x.OriginName.ToLower().Contains(keywordLower)));
             }
 
-            // Tìm kiếm theo năm (nếu có)
             if (year.HasValue)
             {
                 q = q.Where(x => x.Year == year);
             }
 
-            // Tìm kiếm theo thể loại (category)
             if (!string.IsNullOrWhiteSpace(cat))
             {
                 q = q.Where(x => x.MovieCategories.Any(mc => mc.Category.Slug == cat));
@@ -62,10 +59,9 @@ namespace OphimIngestApi.Controllers
                 q = q.Where(x => x.MovieCountries.Any(mc => mc.Country.Slug == country));
             }
 
-            // Sắp xếp theo ngày cập nhật mới nhất
             q = q.OrderByDescending(x => x.UpdatedAt);
 
-            var total = await q.CountAsync();  // Tổng số kết quả
+            var total = await q.CountAsync();  
             var items = await q.Select(x => new {
                 x.Slug,
                 x.Name,
@@ -76,9 +72,8 @@ namespace OphimIngestApi.Controllers
                 x.PosterUrl,
                 x.Type,
                 x.Status
-            }).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();  // Phân trang
+            }).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();  
 
-            // Kiểm tra nếu không có dữ liệu
             if (!items.Any())
             {
                 return Ok(new { message = "Không có kết quả phù hợp.", total, page, pageSize, items });
@@ -89,7 +84,6 @@ namespace OphimIngestApi.Controllers
 
 
         // Chi tiết theo slug
-        // GET /api/movies/tro-choi-con-muc
         [HttpGet("{slug}")]
         public async Task<IActionResult> Detail([FromRoute] string slug)
         {

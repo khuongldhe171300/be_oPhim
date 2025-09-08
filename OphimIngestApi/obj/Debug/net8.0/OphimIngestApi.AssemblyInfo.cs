@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OphimIngestApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e356b48f1bfc2e3f9cf6eda64231286d2c51d7e1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcef7ea5c2bb473eccb8d7c859af8f798928972c")]
 [assembly: System.Reflection.AssemblyProductAttribute("OphimIngestApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OphimIngestApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

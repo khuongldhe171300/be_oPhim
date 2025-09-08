@@ -17,18 +17,19 @@ namespace OphimIngestApi.Controllers
             take = Math.Clamp(take, 1, 24);
 
             // Helper method để tạo movie object
-            var movieSelector = new Func<OphimIngestApi.Data.Entities.Movie, object>(x => new { 
-                id = x.Id, 
-                slug = x.Slug, 
-                name = x.Name, 
+            var movieSelector = new Func<OphimIngestApi.Data.Entities.Movie, object>(x => new
+            {
+                id = x.Id,
+                slug = x.Slug,
+                name = x.Name,
                 originName = x.OriginName,
                 content = x.Content,
-                posterUrl = x.PosterUrl, 
+                posterUrl = x.PosterUrl,
                 thumbUrl = x.ThumbUrl,
-                year = x.Year, 
-                quality = x.Quality, 
-                lang = x.Lang, 
-                type = x.Type, 
+                year = x.Year,
+                quality = x.Quality,
+                lang = x.Lang,
+                type = x.Type,
                 status = x.Status,
                 view = x.View,
                 episodeCurrent = x.EpisodeCurrent,
@@ -120,6 +121,14 @@ namespace OphimIngestApi.Controllers
                 .Select(x => movieSelector(x))
                 .ToListAsync();
 
+            var sliderMovies = await _db.Movies.AsNoTracking()
+            .Where(x => x.View > 0)
+            .OrderByDescending(x => x.View)
+            .ThenByDescending(x => x.UpdatedAt)
+            .Take(10)
+            .Select(x => movieSelector(x))
+            .ToListAsync();
+
             return Ok(new
             {
                 latest,
@@ -128,6 +137,7 @@ namespace OphimIngestApi.Controllers
                 newSingleMovies,
                 cinemaMovies,
                 comingSoon,
+                sliderMovies,
                 byCountry = new
                 {
                     korean = koreanMovies,
@@ -149,12 +159,13 @@ namespace OphimIngestApi.Controllers
                 .OrderByDescending(x => x.View)
                 .ThenByDescending(x => x.UpdatedAt)
                 .Take(take)
-                .Select(x => new { 
-                    id = x.Id, 
-                    slug = x.Slug, 
-                    name = x.Name, 
+                .Select(x => new
+                {
+                    id = x.Id,
+                    slug = x.Slug,
+                    name = x.Name,
                     posterUrl = x.PosterUrl,
-                    year = x.Year, 
+                    year = x.Year,
                     view = x.View,
                     episodeCurrent = x.EpisodeCurrent,
                     episodeTotal = x.EpisodeTotal,
@@ -177,13 +188,14 @@ namespace OphimIngestApi.Controllers
                 .OrderByDescending(x => x.UpdatedAt)
                 .Skip(skip)
                 .Take(take)
-                .Select(x => new { 
-                    id = x.Id, 
-                    slug = x.Slug, 
-                    name = x.Name, 
+                .Select(x => new
+                {
+                    id = x.Id,
+                    slug = x.Slug,
+                    name = x.Name,
                     originName = x.OriginName,
                     posterUrl = x.PosterUrl,
-                    year = x.Year, 
+                    year = x.Year,
                     quality = x.Quality,
                     lang = x.Lang,
                     type = x.Type,
@@ -205,13 +217,14 @@ namespace OphimIngestApi.Controllers
                 .OrderByDescending(x => x.UpdatedAt)
                 .Skip(skip)
                 .Take(take)
-                .Select(x => new { 
-                    id = x.Id, 
-                    slug = x.Slug, 
-                    name = x.Name, 
+                .Select(x => new
+                {
+                    id = x.Id,
+                    slug = x.Slug,
+                    name = x.Name,
                     originName = x.OriginName,
                     posterUrl = x.PosterUrl,
-                    year = x.Year, 
+                    year = x.Year,
                     quality = x.Quality,
                     lang = x.Lang,
                     type = x.Type
@@ -233,13 +246,14 @@ namespace OphimIngestApi.Controllers
                 .ThenByDescending(x => x.UpdatedAt)
                 .Skip(skip)
                 .Take(take)
-                .Select(x => new { 
-                    id = x.Id, 
-                    slug = x.Slug, 
-                    name = x.Name, 
+                .Select(x => new
+                {
+                    id = x.Id,
+                    slug = x.Slug,
+                    name = x.Name,
                     originName = x.OriginName,
                     posterUrl = x.PosterUrl,
-                    year = x.Year, 
+                    year = x.Year,
                     quality = x.Quality,
                     lang = x.Lang,
                     type = x.Type,
@@ -267,13 +281,14 @@ namespace OphimIngestApi.Controllers
                 .OrderByDescending(x => x.UpdatedAt)
                 .Skip(skip)
                 .Take(take)
-                .Select(x => new { 
-                    id = x.Id, 
-                    slug = x.Slug, 
-                    name = x.Name, 
+                .Select(x => new
+                {
+                    id = x.Id,
+                    slug = x.Slug,
+                    name = x.Name,
                     originName = x.OriginName,
                     posterUrl = x.PosterUrl,
-                    year = x.Year, 
+                    year = x.Year,
                     quality = x.Quality,
                     lang = x.Lang,
                     type = x.Type,

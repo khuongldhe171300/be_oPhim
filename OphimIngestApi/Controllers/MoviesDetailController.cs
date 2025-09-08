@@ -13,7 +13,6 @@ namespace OphimIngestApi.Controllers
 
         // GET /api/movies/{slug}?epPage=&epPageSize=&server=
        
-        // DTO nhỏ cho nguồn phát
         private record EpisodeSourceVm(string Kind, string Url, string Label, string Server);
 
         [HttpGet("{slug}")]
@@ -23,16 +22,13 @@ namespace OphimIngestApi.Controllers
      [FromQuery] int epPageSize = 20,
      [FromQuery] string? server = null)
         {
-            // Xác định trang bắt đầu và giới hạn số lượng mỗi trang
             epPage = epPage < 1 ? 1 : epPage;
             epPageSize = Math.Clamp(epPageSize, 1, 100);
 
-            // 1) Lấy thông tin cơ bản của phim theo slug
             var m = await _db.Movies.AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Slug == slug);
             if (m == null) return NotFound();
 
-            // 2) Truy vấn dữ liệu liên quan đến thể loại, quốc gia, diễn viên, đạo diễn
             var cats = await _db.MovieCategories.AsNoTracking()
                 .Where(mc => mc.MovieId == m.Id)
                 .Select(mc => new { mc.Category.Slug, mc.Category.Name })
@@ -58,7 +54,6 @@ namespace OphimIngestApi.Controllers
                 .Select(s => s.Name)
                 .ToListAsync();
 
-            // 3) Lấy thông tin các tập phim (episodes) và phân trang
             var epBase = _db.Episodes.AsNoTracking().Where(e => e.MovieId == m.Id);
             var totalEpisodes = await epBase.CountAsync();
             var totalPages = (int)Math.Ceiling(totalEpisodes / (double)epPageSize);
@@ -71,11 +66,9 @@ namespace OphimIngestApi.Controllers
 
             var epIds = epPageItems.Select(x => x.Id).ToList();
 
-            // 4) Lấy nguồn phát (sources) cho các tập trong trang hiện tại
             var srcQ = _db.EpisodeSources.AsNoTracking()
                 .Where(s => epIds.Contains(s.EpisodeId));
 
-            // Nếu có thông số server thì lọc thêm theo server
             if (!string.IsNullOrWhiteSpace(server))
                 srcQ = srcQ.Where(s => s.Server.Name == server);
 
@@ -88,10 +81,8 @@ namespace OphimIngestApi.Controllers
                 Server = s.Server.Name
             }).ToListAsync();
 
-            // Sử dụng ToLookup để nhóm dữ liệu theo EpisodeId
             var srcLookup = srcFlat.ToLookup(x => x.EpisodeId, x => new EpisodeSourceVm(x.Kind, x.Url, x.Label, x.Server));
 
-            // 5) Xây dựng dữ liệu trả về cho các tập phim
             var episodes = new
             {
                 total = totalEpisodes,
@@ -103,11 +94,10 @@ namespace OphimIngestApi.Controllers
                     e.Name,
                     e.Slug,
                     e.Filename,
-                    sources = srcLookup[e.Id]  // Các nguồn phát của tập phim
+                    sources = srcLookup[e.Id]  
                 })
             };
 
-            // 6) Xây dựng payload cho movie
             var movie = new
             {
                 m.Slug,
@@ -135,7 +125,6 @@ namespace OphimIngestApi.Controllers
                 servers = serverNames
             };
 
-            // Trả về kết quả
             return Ok(new { movie, episodes });
         }
 
